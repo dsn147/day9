@@ -1,0 +1,20 @@
+import hashlib  # 使用hashlib进行密码MD5加密
+
+
+# 将文件造在D盘的user.txt文件中
+f = open(file=r"D:\Desktop\user.txt",mode="w+",encoding="utf-8")
+
+# 准备数据模板
+data = "%s;%s"
+# 500用户密码统一：123456，并进行MD5加密传输
+password = hashlib.md5(b"123456").hexdigest() # 获取123456的加密数据
+username = "jason"  # 所有用户名都以jason开头，jason1,jason2….
+for i in range(500):
+    if i < 499:
+        f.write((data + "\n") % (username + str(i),password))
+    else:
+        f.write(data % (username + str(i),password))
+
+f.flush()
+
+f.close()
